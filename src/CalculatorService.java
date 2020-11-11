@@ -2,60 +2,80 @@ import java.util.Scanner;
 
 public class CalculatorService {
 
+    Scanner scanner = new Scanner(System.in);
+    Parameters number = new Parameters();
     double x;
     double y;
+    double result;
 
-    Scanner scanner = new Scanner(System.in);
 
     public double chooseOperation() {
-
-        System.out.println("Wprowadź x:");
-        double x = scanner.nextInt();
-        scanner.nextLine();
+        setX();
         operatorSelector();
-
+        return result;
     }
 
+    private void setX() {
+        System.out.println("Wprowadź x:");
+        x = scanner.nextDouble();
+        number.setX(x);
+        scanner.nextLine();
+    }
+
+    private void setY() {
+        System.out.println("Wprowadź y:");
+        y = scanner.nextDouble();
+        number.setY(y);
+        scanner.nextLine();
+        scanner.close();
+    }
 
     private double operatorSelector() {
         System.out.println("Wybierz dostępne operacje: +, -, *, /");
         String parameter = scanner.nextLine();
-        double result;
+
         switch (parameter) {
             case "+":
-
-                result = addXY(x,y);
+                setY();
+                result = addXY();
                 break;
             case "-":
-               // result =
+                setY();
+                result = minusXY();
                 break;
             case "*":
-              //  result =
+                setY();
+                result = multiplyXY();
                 break;
             case "/":
-                //result =
+                setY();
+                result = divideXY();
                 break;
             default:
                 System.out.println("Wybrano nieprawidłową operację !!! Spróbuj ponownie:");
                 operatorSelector();
-        } return result;
+        }
+        return result;
 
     }
 
-
-    private void addXY(Parameters x, Parameters y) {
-        System.out.println(x.setX(x); +y.getX());
+    private double addXY() {
+        return number.getX() + number.getY();
     }
 
-    private void minusXY(Parameters x, Parameters y) {
-        System.out.println(x.getX() - y.getX());
+    private double minusXY() {
+        return number.getX() - number.getY();
     }
 
-    private void multiplyXY(Parameters x, Parameters y) {
-        System.out.println(x.getX() * y.getX());
+    private double multiplyXY() {
+        return number.getX() * number.getY();
     }
 
-    private void divideXY(Parameters x, Parameters y) {
-        System.out.println(x.getX() / y.getX());
+    private double divideXY() {
+        return number.getX() / number.getY();
+    }
+
+    public void printResult() {
+        System.out.println("Wynik: " + result);
     }
 }

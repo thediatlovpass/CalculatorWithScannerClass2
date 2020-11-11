@@ -1,5 +1,4 @@
 public class Parameters {
-
     private double x;
     private double y;
 
